@@ -5,7 +5,7 @@ from banking.util.util import read_yaml_file
 from banking.logger import logging
 import sys,os
 from banking.constant import *
-from banking.exception import HousingException
+from banking.exception import BankingException
 
 
 class Configuartion:
@@ -19,7 +19,7 @@ class Configuartion:
             self.training_pipeline_config = self.get_training_pipeline_config()
             self.time_stamp = current_time_stamp
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise BankingException(e,sys) from e
 
 
     def get_data_ingestion_config(self) ->DataIngestionConfig:
@@ -33,10 +33,7 @@ class Configuartion:
             data_ingestion_info = self.config_info[DATA_INGESTION_CONFIG_KEY]
             
             dataset_download_url = data_ingestion_info[DATA_INGESTION_DOWNLOAD_URL_KEY]
-            tgz_download_dir = os.path.join(
-                data_ingestion_artifact_dir,
-                data_ingestion_info[DATA_INGESTION_TGZ_DOWNLOAD_DIR_KEY]
-            )
+        
             raw_data_dir = os.path.join(data_ingestion_artifact_dir,
             data_ingestion_info[DATA_INGESTION_RAW_DATA_DIR_KEY]
             )
@@ -57,7 +54,6 @@ class Configuartion:
 
             data_ingestion_config=DataIngestionConfig(
                 dataset_download_url=dataset_download_url, 
-                tgz_download_dir=tgz_download_dir, 
                 raw_data_dir=raw_data_dir, 
                 ingested_train_dir=ingested_train_dir, 
                 ingested_test_dir=ingested_test_dir
@@ -65,7 +61,7 @@ class Configuartion:
             logging.info(f"Data Ingestion config: {data_ingestion_config}")
             return data_ingestion_config
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise BankingException(e,sys) from e
 
     def get_data_validation_config(self) -> DataValidationConfig:
         pass
@@ -94,4 +90,4 @@ class Configuartion:
             logging.info(f"Training pipleine config: {training_pipeline_config}")
             return training_pipeline_config
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise BankingException(e,sys) from e

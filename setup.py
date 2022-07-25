@@ -3,7 +3,7 @@ from typing import List
 
 #Declaring variables for setup functions
 PROJECT_NAME="fraud-detector"
-VERSION="0.0.6"
+VERSION="0.0.8"
 AUTHOR="Akash Rakshit"
 DESRCIPTION="This is an end-to-end MLOPS project"
 

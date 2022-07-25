@@ -1,5 +1,8 @@
 numpy
 Flask
+ipykernel
+matplotlib
+seaborn
 gunicorn
 sklearn
 pandas

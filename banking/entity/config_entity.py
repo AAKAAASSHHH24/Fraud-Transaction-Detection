@@ -1,8 +1,10 @@
 from collections import namedtuple
 
+#DEFINING THE INPUTS OF THE DIFFERENT COMPONENTS
+
 
 DataIngestionConfig=namedtuple("DataIngestionConfig",
-["dataset_download_url","tgz_download_dir","raw_data_dir","ingested_train_dir","ingested_test_dir"])
+["dataset_download_url","raw_data_dir","ingested_train_dir","ingested_test_dir"])
 """Brings data into system"""
 
 
