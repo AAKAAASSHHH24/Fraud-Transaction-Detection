@@ -8,13 +8,13 @@ DataIngestionConfig=namedtuple("DataIngestionConfig",
 """Brings data into system"""
 
 
-DataValidationConfig = namedtuple("DataValidationConfig", ["schema_file_path"])
+DataValidationConfig = namedtuple("DataValidationConfig", ["schema_file_path","report_file_path","report_page_file_path"])
 """Schema Validation means checking file name,no: of columns the file has and the structure of data
 Null Check,duplicate values, imbalance datasets, data drift(statistics of the datasets), domain value
 check i.e. possible values for a column or data range"""
 
 
-DataTransformationConfig = namedtuple("DataTransformationConfig", ["is_fraud",
+DataTransformationConfig = namedtuple("DataTransformationConfig", [
                                                                    "transformed_train_dir",
                                                                    "transformed_test_dir",
                                                                    "preprocessed_object_file_path"])

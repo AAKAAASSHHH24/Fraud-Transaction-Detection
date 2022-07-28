@@ -1,5 +1,5 @@
 from banking.pipeline.pipeline import Pipeline
-from banking.exception import HousingException
+from banking.exception import BankingException
 from banking.logger import logging
 from banking.config.configuration import Configuartion
 #from banking.component.data_transformation import DataTransformation
@@ -8,8 +8,8 @@ import os
 
 def main():
     try:
-        #config_path = os.path.join("config","config.yaml")
-        pipeline = Pipeline()
+        config_path = os.path.join("config","config.yaml")
+        pipeline = Pipeline(Configuartion(config_file_path=config_path))
         pipeline.run_pipeline()
         #pipeline.start()
         #logging.info("main function execution completed.")

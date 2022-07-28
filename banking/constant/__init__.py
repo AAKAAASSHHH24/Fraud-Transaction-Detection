@@ -36,7 +36,6 @@ DATA_INGESTION_INGESTED_DIR_NAME_KEY = "ingested_dir"
 DATA_INGESTION_TRAIN_DIR_KEY = "ingested_train_dir"
 DATA_INGESTION_TEST_DIR_KEY = "ingested_test_dir"
 
-# Data Validation related variable
 
 # Data Validation related variables
 DATA_VALIDATION_CONFIG_KEY = "data_validation_config"
@@ -51,7 +50,6 @@ DATA_VALIDATION_REPORT_PAGE_FILE_NAME_KEY = "report_page_file_name"
 # Data Transformation related variables
 DATA_TRANSFORMATION_ARTIFACT_DIR = "data_transformation"
 DATA_TRANSFORMATION_CONFIG_KEY = "data_transformation_config"
-DATA_TRANSFORMATION_ADD_BEDROOM_PER_ROOM_KEY = "add_bedroom_per_room"
 DATA_TRANSFORMATION_DIR_NAME_KEY = "transformed_dir"
 DATA_TRANSFORMATION_TRAIN_DIR_NAME_KEY = "transformed_train_dir"
 DATA_TRANSFORMATION_TEST_DIR_NAME_KEY = "transformed_test_dir"
@@ -60,10 +58,7 @@ DATA_TRANSFORMATION_PREPROCESSED_FILE_NAME_KEY = "preprocessed_object_file_name"
 
 
 
-COLUMN_TOTAL_ROOMS = "total_rooms"
-COLUMN_POPULATION = "population"
-COLUMN_HOUSEHOLDS = "households"
-COLUMN_TOTAL_BEDROOM = "total_bedrooms"
+
 DATASET_SCHEMA_COLUMNS_KEY=  "columns"
 
 NUMERICAL_COLUMN_KEY="numerical_columns"

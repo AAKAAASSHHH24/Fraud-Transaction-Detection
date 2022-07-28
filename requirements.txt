@@ -6,5 +6,7 @@ seaborn
 gunicorn
 sklearn
 pandas
+dill
+evidently
 PyYAML
 -e .

@@ -27,8 +27,8 @@ class DataIngestion:
             #folder location to download file
             raw_data_dir = self.data_ingestion_config.raw_data_dir
             
-            if os.path.exists(raw_data_dir):
-                os.remove(raw_data_dir)
+            #if os.path.exists(raw_data_dir):
+                #os.remove(raw_data_dir)
             
             os.makedirs(raw_data_dir,exist_ok=True)
 
@@ -56,21 +56,33 @@ class DataIngestion:
 
             logging.info(f"Reading csv file: [{banking_file_path}]")
             banking_data_frame = pd.read_csv(banking_file_path)
+            
+            """NOTE: We are creating subsamples and this will lead to DATA LEAKAGE, but as the original dataset is huge and
+            there is limitation of my local sysytem i am resampling considering all the best practices"""
+            
+            fraud_df = banking_data_frame.loc[banking_data_frame['isFraud'] == 1]
+            non_fraud_df = banking_data_frame[banking_data_frame['isFraud'] == 0][:len(fraud_df)]
 
+            
+            
+            banking_data_frame= pd.concat([fraud_df, non_fraud_df])
+            # reset index
+            banking_data_frame.reset_index(drop=True, inplace=True)
+            #to keep the distribution equivalent in train and test dataset we make a new category on which we split using strat. shuffle split
+            
             banking_data_frame["cat_amount"] = pd.cut(
                 banking_data_frame["amount"], 
-                bins=[0.0, 1.5, 3.0, 4.5, 6.0, np.inf],
-                labels=[1,2,3,4,5]
-            )
-            
+                4,
+                labels=[1,2,3,4]
+            )                          
 
             logging.info(f"Splitting data into train and test")
             strat_train_set = None
             strat_test_set = None
 
-            split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
+            sss = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
 
-            for train_index,test_index in split.split(banking_data_frame, banking_data_frame["income_cat"]):
+            for train_index,test_index in sss.split(banking_data_frame, banking_data_frame["cat_amount"]):
                 strat_train_set = banking_data_frame.loc[train_index].drop(["cat_amount"],axis=1)
                 strat_test_set = banking_data_frame.loc[test_index].drop(["cat_amount"],axis=1)
 

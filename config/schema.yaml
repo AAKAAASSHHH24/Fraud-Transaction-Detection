@@ -1,0 +1,48 @@
+columns:
+ step: int64
+ type: object
+ amount: float64
+ nameOrig: object
+ oldbalanceOrg: float64
+ newbalanceOrig: float64
+ nameDest: object
+ oldbalanceDest: float64
+ newbalanceDest: float64
+ isFraud: int64
+ isFlaggedFraud: int64
+
+numerical_columns:
+  - step
+  - amount
+  - oldbalanceOrg
+  - newbalanceOrig
+  - oldbalanceDest
+  - newbalanceDest
+  - isFraud
+  - isFlaggedFraud
+
+
+
+categorical_columns:
+  - type
+  - nameOrig
+  - nameDest
+
+target_column: isFraud
+
+domain_value:
+  isFraud:
+    - 1
+    - 0
+
+  isFlaggedFraud:
+    - 1
+    - 0
+
+    
+
+
+
+  
+
+
