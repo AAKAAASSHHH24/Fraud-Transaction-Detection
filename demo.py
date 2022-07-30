@@ -2,7 +2,7 @@ from banking.pipeline.pipeline import Pipeline
 from banking.exception import BankingException
 from banking.logger import logging
 from banking.config.configuration import Configuartion
-#from banking.component.data_transformation import DataTransformation
+from banking.components.data_transformation import DataTransformation
 import os
 
 
@@ -12,7 +12,7 @@ def main():
         pipeline = Pipeline(Configuartion(config_file_path=config_path))
         pipeline.run_pipeline()
         #pipeline.start()
-        #logging.info("main function execution completed.")
+        logging.info("main function execution completed.")
         # # data_validation_config = Configuartion().get_data_transformation_config()
         # # print(data_validation_config)
         # schema_file_path=r"D:\Project\machine_learning_project\config\schema.yaml"

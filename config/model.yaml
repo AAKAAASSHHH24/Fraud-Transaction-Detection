@@ -1,0 +1,30 @@
+grid_search:
+  class: GridSearchCV
+  module: sklearn.model_selection
+  params:
+    cv: 5
+    verbose: 2
+model_selection:
+  module_0:
+    class: LogisticRegression
+    module: sklearn.linear_model
+    params:
+      fit_intercept: true
+      penalty : l2
+    search_param_grid:
+      C:
+      - 0.1
+      - 1
+      - 10
+      - 30
+      - 100
+  module_1:
+    class: KNeighborsClassifier
+    module: sklearn.neighbors
+    params:
+      n_neighbors: 5
+      algorithm : kd_tree
+    search_param_grid:
+      weights:
+      - uniform
+      - distance

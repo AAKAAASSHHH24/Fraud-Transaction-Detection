@@ -62,9 +62,6 @@ class DataIngestion:
             
             fraud_df = banking_data_frame.loc[banking_data_frame['isFraud'] == 1]
             non_fraud_df = banking_data_frame[banking_data_frame['isFraud'] == 0][:len(fraud_df)]
-
-            
-            
             banking_data_frame= pd.concat([fraud_df, non_fraud_df])
             # reset index
             banking_data_frame.reset_index(drop=True, inplace=True)

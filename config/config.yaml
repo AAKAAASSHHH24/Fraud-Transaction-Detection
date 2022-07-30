@@ -28,7 +28,10 @@ data_transformation_config:
 model_trainer_config:
   trained_model_dir: trained_model
   model_file_name: model.pkl
-  base_accuracy: 0.6
+  base_accuracy: 0.5
+  overfit_score: .05
+  model_config_dir: config
+  model_config_file_name: model.yaml
 
 
 model_evaluation_config:

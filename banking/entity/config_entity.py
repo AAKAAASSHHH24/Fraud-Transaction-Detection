@@ -21,7 +21,7 @@ DataTransformationConfig = namedtuple("DataTransformationConfig", [
 """EDA and feature engineering"""
 
 
-ModelTrainerConfig = namedtuple("ModelTrainerConfig", ["trained_model_file_path","base_accuracy"])
+ModelTrainerConfig = namedtuple("ModelTrainerConfig", ["trained_model_file_path","base_accuracy", "model_config_file_path", "overfit_score"])
 """model selection,hyper-parameter tuning"""
 
 
