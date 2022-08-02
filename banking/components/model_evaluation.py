@@ -2,7 +2,7 @@
 
 from banking.logger import logging
 from banking.exception import BankingException
-from banking.entity.config_entity import ModelEvaluationConfig
+from banking.entity.config_entity import ModelEvaluationConfig,ModelTrainerConfig
 from banking.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact,ModelTrainerArtifact,ModelEvaluationArtifact
 from banking.constant import *
 import numpy as np
@@ -19,13 +19,15 @@ class ModelEvaluation:
     def __init__(self, model_evaluation_config: ModelEvaluationConfig,
                  data_ingestion_artifact: DataIngestionArtifact,
                  data_validation_artifact: DataValidationArtifact,
-                 model_trainer_artifact: ModelTrainerArtifact):
+                 model_trainer_artifact: ModelTrainerArtifact,
+                 model_trainer_config: ModelTrainerConfig):
         try:
             logging.info(f"{'>>' * 30}Model Evaluation log started.{'<<' * 30} ")
             self.model_evaluation_config = model_evaluation_config
             self.model_trainer_artifact = model_trainer_artifact
             self.data_ingestion_artifact = data_ingestion_artifact
             self.data_validation_artifact = data_validation_artifact
+            self.model_trainer_config = model_trainer_config
         except Exception as e:
             raise BankingException(e, sys) from e
 
@@ -132,7 +134,11 @@ class ModelEvaluation:
                                                                X_test=test_dataframe,
                                                                y_test=test_target_arr,
                                                                base_accuracy=self.model_trainer_artifact.model_accuracy,
-                                                               )
+                                                               overfit_score = self.model_trainer_config.overfit_score
+                                                                                                                    )
+                                                    
+            """model_trainer_artifact funtion defined in model trainer file under components section is imported for model evaluation"""
+            
             logging.info(f"Model evaluation completed. model metric artifact: {metric_info_artifact}")
 
             if metric_info_artifact is None:
@@ -149,7 +155,7 @@ class ModelEvaluation:
                 logging.info(f"Model accepted. Model eval artifact {model_evaluation_artifact} created")
 
             else:
-                logging.info("Trained model is no better than existing model hence not accepting trained model")
+                logging.info("Trained model is not better than existing model hence not accepting trained model")
                 model_evaluation_artifact = ModelEvaluationArtifact(evaluated_model_path=trained_model_file_path,
                                                                     is_model_accepted=False)
             return model_evaluation_artifact

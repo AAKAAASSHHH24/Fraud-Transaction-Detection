@@ -76,7 +76,7 @@ class ModelTrainer:
             overfit_score = self.model_trainer_config.overfit_score
             logging.info(f"overfit_score: {overfit_score}")
 
-            logging.info(f"Initiating operation model selecttion")
+            logging.info(f"Initiating operation model selection")
             best_model = model_factory.get_best_model(X=X_train,y=y_train,base_accuracy=base_accuracy)
             
             logging.info(f"Best model found on training dataset: {best_model}")
@@ -86,6 +86,7 @@ class ModelTrainer:
             
             model_list = [model.best_model for model in grid_searched_best_model_list ]
             logging.info(f"Evaluation all trained model on training and testing dataset both")
+            
             metric_info:MetricInfoArtifact = evaluate_classification_model(model_list=model_list,X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,base_accuracy=base_accuracy,overfit_score = overfit_score)
 
             logging.info(f"Best found model on both training and testing dataset.")
@@ -106,7 +107,8 @@ class ModelTrainer:
             test_rec=metric_info.test_rec,
             train_accuracy=metric_info.train_accuracy,
             test_accuracy=metric_info.test_accuracy,
-            model_accuracy=metric_info.model_accuracy
+            model_accuracy=metric_info.model_accuracy,
+            overfit_score = metric_info.overfit_score
             
             )
 

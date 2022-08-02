@@ -5,7 +5,7 @@ import pip
 from banking.util.util import read_yaml_file, write_yaml_file
 from matplotlib.style import context
 from banking.logger import logging
-from banking.exception import bankingException
+from banking.exception import BankingException
 import os, sys
 import json
 from banking.config.configuration import Configuartion

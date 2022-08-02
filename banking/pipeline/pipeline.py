@@ -34,15 +34,20 @@ Experiment = namedtuple("Experiment", ["experiment_id", "initialization_timestam
                                        "running_status", "start_time", "stop_time", "execution_time", "message",
                                        "experiment_file_path", "accuracy", "is_model_accepted"])
 
-class Pipeline:
+config = Configuartion()
+os.makedirs(config.training_pipeline_config.artifact_dir, exist_ok=True)
+
+
+class Pipeline(Thread):
     experiment: Experiment = Experiment(*([None] * 11))
-    experiment_file_path = None
+    experiment_file_path = os.path.join(config.training_pipeline_config.artifact_dir,
+                                        EXPERIMENT_DIR_NAME, EXPERIMENT_FILE_NAME)
 
     def __init__(self,config: Configuartion = Configuartion()) -> None:
         try:
             os.makedirs(config.training_pipeline_config.artifact_dir, exist_ok=True)
             Pipeline.experiment_file_path=os.path.join(config.training_pipeline_config.artifact_dir,EXPERIMENT_DIR_NAME, EXPERIMENT_FILE_NAME)
-            super().__init__()
+            super().__init__(daemon=False, name="pipeline")
             self.config = config
 
         except Exception as e:
@@ -94,7 +99,7 @@ class Pipeline:
         try:
             model_trainer = ModelTrainer(model_trainer_config=self.config.get_model_trainer_config(),
                                          data_transformation_artifact=data_transformation_artifact
-                                         )
+                                         ) #Object of ModelTrainer class in the components section
             return model_trainer.initiate_model_trainer()
         except Exception as e:
             raise BankingException(e, sys) from e

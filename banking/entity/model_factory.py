@@ -44,7 +44,7 @@ MetricInfoArtifact = namedtuple("MetricInfoArtifact",
 
 
 
-def evaluate_classification_model(model_list: list, X_train:np.ndarray, y_train:np.ndarray, X_test:np.ndarray, y_test:np.ndarray, base_accuracy:float=0.5, overfit_score:float = .05) -> MetricInfoArtifact:
+def evaluate_classification_model(model_list: list, X_train:np.ndarray, y_train:np.ndarray, X_test:np.ndarray, y_test:np.ndarray, base_accuracy:float, overfit_score:float) -> MetricInfoArtifact:
     """
     Description:
     This function compare multiple classification model return best model
@@ -55,13 +55,6 @@ def evaluate_classification_model(model_list: list, X_train:np.ndarray, y_train:
     y_train: Training dataset target feature
     X_test: Testing dataset input feature
     y_test: Testing dataset input feature
-
-    return
-    It retured a named tuple
-    
-    MetricInfoArtifact = namedtuple("MetricInfo",
-                                ["model_name", "model_object", "train_prec", "test_prec", "train_accuracy",
-                                 "test_accuracy", "model_accuracy", "index_number"])
 
     """
     try:

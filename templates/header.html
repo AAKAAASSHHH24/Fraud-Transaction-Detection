@@ -73,7 +73,7 @@ table-layout: fixed;
                         <a class="nav-link {% if 'saved_models' in request.path %} active {% endif %}" href="/saved_models">View Trained Model</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if 'predict' in request.path %} active {% endif %}" href="/predict">Estimate Housing Price</a>
+                        <a class="nav-link {% if 'predict' in request.path %} active {% endif %}" href="/predict">Predict Fraud Transaction</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if 'predict' in request.path %} active {% endif %}" href="/view_experiment_hist">Experiment History</a>
@@ -100,10 +100,10 @@ table-layout: fixed;
                     <a style=" text-decoration: none;color:black" href="/saved_models">View Trained Model</a>
                 </li>
                 <li class="list-group-item py-1 {% if 'predict' in request.path %} active {% endif %}">
-                    <a style=" text-decoration: none;color:black" href="/predict">Estimate Housing Price</a>
+                    <a style=" text-decoration: none;color:black" href="/predict">Predict Fraud Transaction</a>
                 </li>
                 <li class="list-group-item py-1 {% if 'train' in request.path %} active {% endif %}">
-                    <a style=" text-decoration: none;color:black" href="/train">Train Housing Price Estimator</a>
+                    <a style=" text-decoration: none;color:black" href="/train">Train  Fraud Transaction</a>
                 </li>
                 
 
