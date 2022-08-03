@@ -1,5 +1,3 @@
-
-
 from banking.logger import logging
 from banking.exception import BankingException
 from banking.entity.config_entity import DataValidationConfig,DataIngestionConfig
@@ -122,7 +120,6 @@ class DataValidation:
                 message="Data Validation performed successully."
             )
             logging.info(f"Data validation artifact: {data_validation_artifact}")
-            
             return data_validation_artifact
         except Exception as e:
             raise BankingException(e,sys) from e

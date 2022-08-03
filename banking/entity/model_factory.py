@@ -40,7 +40,7 @@ BestModel = namedtuple("BestModel", ["model_serial_number",
 
 MetricInfoArtifact = namedtuple("MetricInfoArtifact",
                                 ["model_name", "model_object", "train_prec", "test_prec", "train_accuracy",
-                                 "test_accuracy", "model_accuracy", "index_number"])
+                                 "test_accuracy", "model_accuracy", "index_number","overfit_score"])
 
 
 
@@ -115,6 +115,13 @@ def evaluate_classification_model(model_list: list, X_train:np.ndarray, y_train:
 
             #if model accuracy is greater than base accuracy and train and test score is within certain thershold
             #we will accept that model as accepted model
+            
+            """MetricInfoArtifact = namedtuple("MetricInfoArtifact",
+                                ["model_name", "model_object", "train_prec", "test_prec", "train_accuracy",
+                                 "test_accuracy", "model_accuracy", "index_number","overfit_score"])
+"""
+            
+            
             if model_accuracy >= base_accuracy and diff_test_train_acc < overfit_score:
                 base_accuracy = model_accuracy
                 metric_info_artifact = MetricInfoArtifact(model_name=model_name,
@@ -124,7 +131,8 @@ def evaluate_classification_model(model_list: list, X_train:np.ndarray, y_train:
                                                         train_accuracy=train_acc,
                                                         test_accuracy=test_acc,
                                                         model_accuracy=model_accuracy,
-                                                        index_number=index_number)
+                                                        index_number=index_number,
+                                                        overfit_score =diff_test_train_acc)
 
                 logging.info(f"Acceptable model found {metric_info_artifact}. ")
             index_number += 1
