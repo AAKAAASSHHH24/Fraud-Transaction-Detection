@@ -27,8 +27,8 @@ MODEL_DIR = os.path.join(ROOT_DIR, SAVED_MODELS_DIR_NAME)
 
 from banking.logger import get_log_dataframe
 
-bankING_DATA_KEY = "banking_data"
-MEDIAN_bankING_VALUE_KEY = "median_house_value"
+BANKING_DATA_KEY = "banking_data"
+is_Fraud_VALUE_KEY = "median_house_value"
 
 app = Flask(__name__)
 
@@ -103,37 +103,29 @@ def train():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     context = {
-        bankING_DATA_KEY: None,
-        MEDIAN_bankING_VALUE_KEY: None
+        BANKING_DATA_KEY: None,
+        is_Fraud_VALUE_KEY: None
     }
 
     if request.method == 'POST':
-        longitude = float(request.form['longitude'])
-        latitude = float(request.form['latitude'])
-        banking_median_age = float(request.form['banking_median_age'])
-        total_rooms = float(request.form['total_rooms'])
-        total_bedrooms = float(request.form['total_bedrooms'])
-        population = float(request.form['population'])
-        households = float(request.form['households'])
-        median_income = float(request.form['median_income'])
-        ocean_proximity = request.form['ocean_proximity']
+        step = float(request.form['step'])
+        amount = float(request.form['amount'])
+        newbalanceOrig = float(request.form['newbalanceOrig'])
+        newbalanceDest = float(request.form['newbalanceDest'])
+        isFlaggedFraud = float(request.form['isFlaggedFraud'])
 
-        banking_data = BankingData(longitude=longitude,
-                                   latitude=latitude,
-                                   banking_median_age=banking_median_age,
-                                   total_rooms=total_rooms,
-                                   total_bedrooms=total_bedrooms,
-                                   population=population,
-                                   households=households,
-                                   median_income=median_income,
-                                   ocean_proximity=ocean_proximity,
-                                   )
+        banking_data = BankingData(step=step,
+                                   amount=amount,
+                                   newbalanceOrig=newbalanceOrig,
+                                   newbalanceDest=newbalanceDest,
+                                   isFlaggedFraud=isFlaggedFraud
+                                  )
         banking_df = banking_data.get_banking_input_data_frame()
-        banking_predictor = BankingPredictor(model_dir=MODEL_DIR)
-        median_banking_value = banking_predictor.predict(X=banking_df)
+        fraud_predictor = BankingPredictor(model_dir=MODEL_DIR)
+        is_Fraud_value = fraud_predictor.predict(X=banking_df)
         context = {
-            bankING_DATA_KEY: banking_data.get_banking_data_as_dict(),
-            MEDIAN_bankING_VALUE_KEY: median_banking_value,
+            BANKING_DATA_KEY: banking_data.get_banking_data_as_dict(),
+            is_Fraud_VALUE_KEY: is_Fraud_value,
         }
         return render_template('predict.html', context=context)
     return render_template("predict.html", context=context)

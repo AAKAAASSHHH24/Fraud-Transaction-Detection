@@ -15,74 +15,46 @@
         <form action="/predict" method="post">
             <legend>Housing Estimation Form</legend>
             <div class="mb-3">
-                <label class="form-label">Longitude</label>
-                <input class="form-control" type="text" name="longitude" placeholder="Enter a value of longitude"
+                <label class="form-label">step</label>
+                <input class="form-control" type="text" name="step" placeholder="Enter step"
                     required />
             </div>
             <div class="mb-3">
-                <label class="form-label">Latitude</label>
-                <input class="form-control" type="text" name="latitude" placeholder="Enter a value of latitude"
-                    required />
-
-            </div>
-            <div class="mb-3">
-                <label class="form-label">House Median Age</label>
-                <input class="form-control" type="text" name="housing_median_age"
-                    placeholder="Enter a value of housing_median_age" />
-
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Total Rooms</label>
-                <input class="form-control" type="text" name="total_rooms" placeholder="Enter a value of total_rooms"
+                <label class="form-label">amount</label>
+                <input class="form-control" type="text" name="amount" placeholder="Enter a value of amount"
                     required />
 
             </div>
             <div class="mb-3">
-                <label class="form-label">Total Bedrooms</label>
-                <input class="form-control" type="text" name="total_bedrooms"
-                    placeholder="Enter a value of total_bedrooms" required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Population</label>
-                <input class="form-control" type="text" name="population" placeholder="Enter a value of population"
-                    required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Households</label>
-                <input class="form-control" type="text" name="households" placeholder="Enter a value of households"
-                    required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Median Income</label>
-                <input class="form-control" type="text" name="median_income"
-                    placeholder="Enter a value of median_income" required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Ocean Proximity</label>
-                <select class="form-control" name="ocean_proximity" placeholder="Enter a value of ocean_proximity"
-                    required>
+                <label class="form-label">newbalanceOrig</label>
+                <input class="form-control" type="text" name="newbalanceOrig"
+                    placeholder="Enter a value of newbalanceOrig" />
 
-                    <option value="<1H OCEAN">
-                        &lt;1H OCEAN
+            </div>
+            <div class="mb-3">
+                <label class="form-label">newbalanceDest</label>
+                <input class="form-control" type="text" name="newbalanceDest" placeholder="Enter a value of newbalanceDest"
+                    required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">isFlaggedFraud</label>
+                <input class="form-control" type="text" name="isFlaggedFraud"
+                    placeholder="Enter whether transaction is FlaggedFraud" 
+                    required />
+                    
+                    <option value="1">
+                        1
                     </option>
-                    <option value="INLAND">
-                        INLAND
-                    </option>
-                    <option value="NEAR BAY">
-                        NEAR BAY
-                    </option>
-                    <option value="NEAR OCEAN">
-                        NEAR OCEAN
-                    </option>
-                    <option value="ISLAND">
-                        ISLAND
+                    <option value="0">
+                        0
                     </option>
 
                 </select>
             </div>
             <div class="mb-3">
 
-                <input class="btn btn-primary" type="submit" value="Predict Median House Value" required />
+                <input class="btn btn-primary" type="submit" value="Predict Fraud or Not Fraud" required />
             </div>
 
         </form>
@@ -94,7 +66,7 @@
                 Fraud Transaction
             </div>
             <div class="card-body">
-        {% if context['housing_data'] is not none %}
+        {% if context['banking_data'] is not none %}
         <table class="table table-striped">
             <caption> Fraud Transaction Prediction </caption>
             <tr>
@@ -102,7 +74,7 @@
                 <th>Feature Value</th>
 
             </tr>
-            {% for column,value in context['housing_data'].items() %}
+            {% for column,value in context['banking_data'].items() %}
 
 
 
@@ -116,7 +88,7 @@
 
                 <td>median_house_value </td>
                 <td>
-                    {{ context['median_house_value'] }}
+                    {{ context['isFraud'] }}
                 </td>
             </tr>
         </table>
