@@ -3,7 +3,7 @@
 {% block head %}
 
 
-<title>Housing Estimator</title>
+<title>Fraud Predictor</title>
 {% endblock %}
 
 {% block content %}
@@ -42,7 +42,7 @@
                 <input class="form-control" type="text" name="isFlaggedFraud"
                     placeholder="Enter whether transaction is FlaggedFraud" 
                     required />
-                    
+
                     <option value="1">
                         1
                     </option>
@@ -86,7 +86,7 @@
             {% endfor %}
             <tr>
 
-                <td>median_house_value </td>
+                <td>isFraud </td>
                 <td>
                     {{ context['isFraud'] }}
                 </td>
