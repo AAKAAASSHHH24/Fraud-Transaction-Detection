@@ -14,7 +14,7 @@ from banking.pipeline.pipeline import Pipeline
 from banking.entity.banking_predictor import BankingPredictor, BankingData
 from flask import send_file, abort, render_template
 
-
+pipeline = Pipeline()
 ROOT_DIR = os.getcwd()
 LOG_FOLDER_NAME = "logs"
 PIPELINE_FOLDER_NAME = "banking"
@@ -127,7 +127,7 @@ def predict():
             BANKING_DATA_KEY: banking_data.get_banking_data_as_dict(),
             is_Fraud_VALUE_KEY: is_Fraud_value,
         }
-        return render_template('predict.html', context=context)
+        
     return render_template("predict.html", context=context)
 
 

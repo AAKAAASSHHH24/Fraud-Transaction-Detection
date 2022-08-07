@@ -70,6 +70,6 @@ class BankingPredictor:
             model_path = self.get_latest_model_path()
             model = load_object(file_path=model_path)
             median_house_value = model.predict(X)
-            return median_house_value
+            return median_house_value[0]
         except Exception as e:
             raise BankingException(e, sys) from e
