@@ -28,7 +28,7 @@ MODEL_DIR = os.path.join(ROOT_DIR, SAVED_MODELS_DIR_NAME)
 from banking.logger import get_log_dataframe
 
 BANKING_DATA_KEY = "banking_data"
-is_Fraud_VALUE_KEY = "median_house_value"
+IS_FRAUD_VALUE_KEY = "fraud"
 
 app = Flask(__name__)
 
@@ -104,7 +104,7 @@ def train():
 def predict():
     context = {
         BANKING_DATA_KEY: None,
-        is_Fraud_VALUE_KEY: None
+        IS_FRAUD_VALUE_KEY: None
     }
 
     if request.method == 'POST':
@@ -125,7 +125,7 @@ def predict():
         is_Fraud_value = fraud_predictor.predict(X=banking_df)
         context = {
             BANKING_DATA_KEY: banking_data.get_banking_data_as_dict(),
-            is_Fraud_VALUE_KEY: is_Fraud_value,
+            IS_FRAUD_VALUE_KEY: is_Fraud_value
         }
         
     return render_template("predict.html", context=context)
