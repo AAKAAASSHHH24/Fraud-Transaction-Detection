@@ -8,5 +8,6 @@ sklearn
 pandas
 dill
 evidently
+imblearn
 PyYAML
 -e .
