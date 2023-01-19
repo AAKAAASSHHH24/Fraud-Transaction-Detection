@@ -10,3 +10,9 @@
 4. [GIT cli](https://git-scm.com/downloads)
 5. [GIT Documentation](https://git-scm.com/docs/gittutorial)
 
+### Sample video of the project
+
+
+
+https://user-images.githubusercontent.com/101935492/213551753-c32bca10-18b8-42a8-94ec-e1d153b5aad5.mp4
+
